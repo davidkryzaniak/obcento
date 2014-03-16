@@ -9,17 +9,15 @@ $consumer_secret = '';
 $access_token = '';
 $access_token_secret = '';
 
+require_once('config.php');
+
 $obcento = ObcentoTwitter::instance(
 	$consumer_key,
 	$consumer_secret,
 	$access_token,
 	$access_token_secret);
 
-/* get the last 50 of the authenticating user's tweets */
-$obcento->getUserTimeline(NULL, 50)->fetchJSON();
-
-/* get some tweets from your 'home' timeline */
-$obcento->getHomeTimeline()->fetchArray();
-
 /* get the last few mentions of the authenticating user */
-$obcento->getMentionsTimeline(5); // yes, there is a __toString()!
+print_r(
+    $obcento->statuses('user_timeline','',array())
+);
